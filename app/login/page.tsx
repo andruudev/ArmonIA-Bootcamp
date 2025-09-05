@@ -39,7 +39,7 @@ export default function LoginPage() {
       setError(
         err instanceof Error
           ? err.message
-          : "Invalid email or password. Please try again."
+          : "Correo electrónico o contraseña no válidos. Inténtalo de nuevo."
       );
     } finally {
       setLoading(false);
@@ -52,10 +52,10 @@ export default function LoginPage() {
         <Card className="w-full md:w-5/12 max-w-2xl p-8 md:p-10 rounded-3xl shadow-2xl border border-primary/10 bg-card/90 backdrop-blur-lg mt-12">
           <div className="mb-6 text-center">
             <h1 className="text-2xl md:text-3xl font-extrabold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent mb-1 tracking-tight">
-              Sign In
+              Ingresar
             </h1>
             <p className="text-base text-muted-foreground font-medium">
-              Welcome back! Please sign in to continue your journey.
+              ¡Bienvenido de nuevo! Inicia sesión para continuar tu viaje.
             </p>
           </div>
           <form className="space-y-6" onSubmit={handleSubmit}>
@@ -85,7 +85,7 @@ export default function LoginPage() {
                   htmlFor="password"
                   className="block text-base font-semibold mb-1"
                 >
-                  Password
+                  Contraseña
                 </label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
@@ -112,27 +112,27 @@ export default function LoginPage() {
               type="submit"
               disabled={loading}
             >
-              {loading ? "Signing in..." : "Sign In"}
+              {loading ? "Ingresando..." : "Ingresar"}
             </Button>
           </form>
           <div className="my-6 border-t border-primary/10" />
           <div className="flex flex-col items-center gap-2">
             <div className="flex items-center justify-center gap-2 text-sm">
               <span className="text-muted-foreground">
-                Don&apos;t have an account?
+                ¿No tienes una cuenta?
               </span>
               <Link
                 href="/signup"
                 className="text-primary font-semibold underline hover:text-primary/80 transition-colors"
               >
-                Sign up
+                Registrarte
               </Link>
               <span className="text-muted-foreground">·</span>
               <Link
                 href="/forgot-password"
                 className="text-primary underline hover:text-primary/80 transition-colors"
               >
-                Forgot password?
+                ¿Has olvidado tu contraseña?
               </Link>
             </div>
           </div>
