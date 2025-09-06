@@ -68,10 +68,10 @@ interface ApiResponse {
 }
 
 const SUGGESTED_QUESTIONS = [
-  { text: "How can I manage my anxiety better?" },
-  { text: "I've been feeling overwhelmed lately" },
-  { text: "Can we talk about improving sleep?" },
-  { text: "I need help with work-life balance" },
+  { text: "¿Cómo puedo gestionar mejor mi ansiedad?" },
+  { text: "Últimamente me siento abrumado" },
+  { text: "¿Podemos hablar sobre cómo mejorar el sueño?" },
+  { text: "Necesito ayuda para conciliar mi vida laboral y personal" },
 ];
 
 const glowAnimation = {
@@ -114,7 +114,6 @@ export default function TherapyPage() {
       const newSessionId = await createChatSession();
       console.log("New session created:", newSessionId);
 
-      // Update sessions list immediately
       const newSession: ChatSession = {
         sessionId: newSessionId,
         messages: [],
@@ -122,15 +121,12 @@ export default function TherapyPage() {
         updatedAt: new Date(),
       };
 
-      // Update all state in one go
       setSessions((prev) => [newSession, ...prev]);
       setSessionId(newSessionId);
       setMessages([]);
 
-      // Update URL without refresh
       window.history.pushState({}, "", `/therapy/${newSessionId}`);
 
-      // Force a re-render of the chat area
       setIsLoading(false);
     } catch (error) {
       console.error("Failed to create new session:", error);
@@ -138,7 +134,6 @@ export default function TherapyPage() {
     }
   };
 
-  // Initialize chat session and load history
   useEffect(() => {
     const initChat = async () => {
       try {
@@ -176,7 +171,7 @@ export default function TherapyPage() {
           {
             role: "assistant",
             content:
-              "I apologize, but I'm having trouble loading the chat session. Please try refreshing the page.",
+              "Disculpe, pero tengo problemas para cargar la sesión de chat. Intente actualizar la página.",
             timestamp: new Date(),
           },
         ]);
@@ -239,7 +234,6 @@ export default function TherapyPage() {
     setIsTyping(true);
 
     try {
-      // Add user message
       const userMessage: ChatMessage = {
         role: "user",
         content: currentMessage,
@@ -247,7 +241,6 @@ export default function TherapyPage() {
       };
       setMessages((prev) => [...prev, userMessage]);
 
-      // Check for stress signals
       const stressCheck = detectStressSignals(currentMessage);
       if (stressCheck) {
         setStressPrompt(stressCheck);
@@ -256,11 +249,10 @@ export default function TherapyPage() {
       }
 
       console.log("Sending message to API...");
-      // Send message to API
+
       const response = await sendChatMessage(sessionId, currentMessage);
       console.log("Raw API response:", response);
 
-      // Parse the response if it's a string
       const aiResponse =
         typeof response === "string" ? JSON.parse(response) : response;
       console.log("Parsed AI response:", aiResponse);
@@ -271,7 +263,7 @@ export default function TherapyPage() {
         content:
           aiResponse.response ||
           aiResponse.message ||
-          "I'm here to support you. Could you tell me more about what's on your mind?",
+          "Estoy aquí para apoyarte. ¿Podrías contarme más sobre lo que piensas?",
         timestamp: new Date(),
         metadata: {
           analysis: aiResponse.analysis || {
@@ -303,7 +295,7 @@ export default function TherapyPage() {
         {
           role: "assistant",
           content:
-            "I apologize, but I'm having trouble connecting right now. Please try again in a moment.",
+            "Disculpe, pero no puedo conectarme. Vuelva a intentarlo en un momento.",
           timestamp: new Date(),
         },
       ]);
@@ -325,16 +317,16 @@ export default function TherapyPage() {
 
   const detectStressSignals = (message: string): StressPrompt | null => {
     const stressKeywords = [
-      "stress",
-      "anxiety",
-      "worried",
-      "panic",
-      "overwhelmed",
-      "nervous",
-      "tense",
-      "pressure",
-      "can't cope",
-      "exhausted",
+      "estrés",
+      "ansiedad",
+      "preocupado",
+      "pánico",
+      "abrumado",
+      "nervioso",
+      "tenso",
+      "presión",
+      "no puedo con todo",
+      "agotado",
     ];
 
     const lowercaseMsg = message.toLowerCase();
@@ -346,24 +338,24 @@ export default function TherapyPage() {
       const activities = [
         {
           type: "breathing" as const,
-          title: "Breathing Exercise",
+          title: "Ejercicio de respiración",
           description:
-            "Follow calming breathing exercises with visual guidance",
+            "Siga ejercicios de respiración relajante con guía visual.",
         },
         {
           type: "garden" as const,
-          title: "Zen Garden",
-          description: "Create and maintain your digital peaceful space",
+          title: "Jardín Zen",
+          description: "Crea y mantén tu espacio digital de paz",
         },
         {
           type: "forest" as const,
-          title: "Mindful Forest",
-          description: "Take a peaceful walk through a virtual forest",
+          title: "Bosque consciente",
+          description: "Da un paseo tranquilo por un bosque virtual.",
         },
         {
           type: "waves" as const,
-          title: "Ocean Waves",
-          description: "Match your breath with gentle ocean waves",
+          title: "Olas del océano",
+          description: "Combina tu respiración con las suaves olas del océano.",
         },
       ];
 
@@ -431,7 +423,7 @@ export default function TherapyPage() {
         <div className="w-80 flex flex-col border-r bg-muted/30">
           <div className="p-4 border-b">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold">Chat Sessions</h2>
+              <h2 className="text-lg font-semibold">Sesiones de chat</h2>
               <Button
                 variant="ghost"
                 size="icon"
@@ -457,7 +449,7 @@ export default function TherapyPage() {
               ) : (
                 <MessageSquare className="w-4 h-4" />
               )}
-              New Session
+              Nueva sesión
             </Button>
           </div>
 
@@ -486,20 +478,20 @@ export default function TherapyPage() {
                   </p>
                   <div className="flex items-center justify-between mt-2">
                     <span className="text-xs text-muted-foreground">
-                      {session.messages.length} messages
+                      {session.messages.length} mensajes
                     </span>
                     <span className="text-xs text-muted-foreground">
                       {(() => {
                         try {
                           const date = new Date(session.updatedAt);
                           if (isNaN(date.getTime())) {
-                            return "Just now";
+                            return "En este momento";
                           }
                           return formatDistanceToNow(date, {
                             addSuffix: true,
                           });
                         } catch (error) {
-                          return "Just now";
+                          return "En este momento";
                         }
                       })()}
                     </span>
@@ -519,9 +511,9 @@ export default function TherapyPage() {
                 <Bot className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="font-semibold">AI Therapist</h2>
+                <h2 className="font-semibold">Terapeuta de IA</h2>
                 <p className="text-sm text-muted-foreground">
-                  {messages.length} messages
+                  {messages.length} mensaje
                 </p>
               </div>
             </div>
@@ -552,11 +544,11 @@ export default function TherapyPage() {
                         </motion.div>
                       </div>
                       <span className="bg-gradient-to-r from-primary/90 to-primary bg-clip-text text-transparent">
-                        AI Therapist
+                        Terapeuta de IA
                       </span>
                     </div>
                     <p className="text-muted-foreground mt-2">
-                      How can I assist you today?
+                     ¿Cómo puedo ayudarle hoy?
                     </p>
                   </div>
                 </div>
@@ -635,7 +627,7 @@ export default function TherapyPage() {
                           </div>
                           {msg.metadata?.goal && (
                             <p className="text-xs text-muted-foreground mt-2">
-                              Goal: {msg.metadata.goal}
+                              Objetivo: {msg.metadata.goal}
                             </p>
                           )}
                         </div>
@@ -656,8 +648,8 @@ export default function TherapyPage() {
                       </div>
                     </div>
                     <div className="flex-1 space-y-2">
-                      <p className="font-medium text-sm">AI Therapist</p>
-                      <p className="text-sm text-muted-foreground">Typing...</p>
+                      <p className="font-medium text-sm">Terapeuta de IA</p>
+                      <p className="text-sm text-muted-foreground">Escribiendo...</p>
                     </div>
                   </motion.div>
                 )}
@@ -666,7 +658,6 @@ export default function TherapyPage() {
             </div>
           )}
 
-          {/* Input area */}
           <div className="border-t bg-background/50 backdrop-blur supports-[backdrop-filter]:bg-background/50 p-4">
             <form
               onSubmit={handleSubmit}
@@ -678,7 +669,7 @@ export default function TherapyPage() {
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder={
                     isChatPaused
-                      ? "Complete the activity to continue..."
+                      ? "Completa la actividad para continuar..."
                       : "Ask me anything..."
                   }
                   className={cn(
@@ -722,12 +713,12 @@ export default function TherapyPage() {
               </div>
             </form>
             <div className="mt-2 text-xs text-center text-muted-foreground">
-              Press <kbd className="px-2 py-0.5 rounded bg-muted">Enter ↵</kbd>{" "}
-              to send,
+              Presiona <kbd className="px-2 py-0.5 rounded bg-muted">Enter ↵</kbd>{" "}
+              para enviar,
               <kbd className="px-2 py-0.5 rounded bg-muted ml-1">
                 Shift + Enter
               </kbd>{" "}
-              for new line
+              para nueva linea
             </div>
           </div>
         </div>
