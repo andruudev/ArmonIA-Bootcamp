@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Progress } from "@/components/ui/progress";
 
-const BREATH_DURATION = 8; // seconds for one breath cycle
-const SESSION_DURATION = 5 * 60; // 5 minutes in seconds
+const BREATH_DURATION = 8; 
+const SESSION_DURATION = 5 * 60; 
 
 export function OceanWaves() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -103,7 +103,7 @@ export function OceanWaves() {
       <div className="w-64 space-y-6">
         <div className="space-y-2">
           <div className="flex justify-between text-sm text-muted-foreground">
-            <span>Volume</span>
+            <span>Volumen</span>
             <span>{volume}%</span>
           </div>
           <div className="flex items-center gap-2">

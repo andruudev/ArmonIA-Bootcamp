@@ -78,13 +78,12 @@ export function BreathingGame() {
         >
           <Check className="w-10 h-10 text-green-500" />
         </motion.div>
-        <h3 className="text-2xl font-semibold">Great job!</h3>
+        <h3 className="text-2xl font-semibold">¡Buen trabajo!</h3>
         <p className="text-muted-foreground text-center max-w-sm">
-          You've completed {TOTAL_ROUNDS} rounds of breathing exercises. How do
-          you feel?
+          Haz completado {TOTAL_ROUNDS} rondas de ejercicios de respiración. ¿Cómo te sientes?
         </p>
         <Button onClick={handleReset} className="mt-4">
-          Start Again
+          Iniciar otra vez
         </Button>
       </div>
     );

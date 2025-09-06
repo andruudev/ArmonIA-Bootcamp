@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Progress } from "@/components/ui/progress";
 
-const MEDITATION_DURATION = 5 * 60; // 5 minutes in seconds
+const MEDITATION_DURATION = 5 * 60;
 
 export function ForestGame() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -15,20 +15,18 @@ export function ForestGame() {
   const [progress, setProgress] = useState(0);
   const [timeLeft, setTimeLeft] = useState(MEDITATION_DURATION);
   const [audioElements] = useState({
-    birds: new Audio("/sounds/birds.mp3"),
+    birds: new Audio("../public/sounds/birds.mp3"),
     wind: new Audio("/sounds/wind.mp3"),
     leaves: new Audio("/sounds/leaves.mp3"),
   });
 
   useEffect(() => {
-    // Set up audio loops
     Object.values(audioElements).forEach((audio) => {
       audio.loop = true;
       audio.volume = volume / 100;
     });
 
     return () => {
-      // Cleanup audio on unmount
       Object.values(audioElements).forEach((audio) => {
         audio.pause();
         audio.currentTime = 0;
@@ -100,7 +98,7 @@ export function ForestGame() {
       <div className="w-64 space-y-6">
         <div className="space-y-2">
           <div className="flex justify-between text-sm text-muted-foreground">
-            <span>Volume</span>
+            <span>Volumen</span>
             <span>{volume}%</span>
           </div>
           <div className="flex items-center gap-2">

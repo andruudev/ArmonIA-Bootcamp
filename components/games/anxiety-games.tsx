@@ -25,8 +25,8 @@ import { OceanWaves } from "./ocean-waves";
 const games = [
   {
     id: "breathing",
-    title: "Breathing Patterns",
-    description: "Follow calming breathing exercises with visual guidance",
+    title: "Patrones de respiración",
+    description: "Siga ejercicios de respiración relajante con guía visual.",
     icon: Wind,
     color: "text-blue-500",
     bgColor: "bg-blue-500/10",
@@ -34,8 +34,8 @@ const games = [
   },
   {
     id: "garden",
-    title: "Zen Garden",
-    description: "Create and maintain your digital peaceful space",
+    title: "Jardín Zen",
+    description: "Crea y mantén tu espacio digital de paz",
     icon: Flower2,
     color: "text-rose-500",
     bgColor: "bg-rose-500/10",
@@ -43,8 +43,8 @@ const games = [
   },
   {
     id: "forest",
-    title: "Mindful Forest",
-    description: "Take a peaceful walk through a virtual forest",
+    title: "Bosque consciente",
+    description: "Da un paseo tranquilo por un bosque virtual.",
     icon: TreePine,
     color: "text-green-500",
     bgColor: "bg-green-500/10",
@@ -52,8 +52,8 @@ const games = [
   },
   {
     id: "waves",
-    title: "Ocean Waves",
-    description: "Match your breath with gentle ocean waves",
+    title: "Olas del océano",
+    description: "Combina tu respiración con las suaves olas del océano.",
     icon: Waves,
     color: "text-cyan-500",
     bgColor: "bg-cyan-500/10",
@@ -81,7 +81,7 @@ export const AnxietyGames = ({ onGamePlayed }: AnxietyGamesProps) => {
           games.find((g) => g.id === gameId)?.description || ""
         );
       } catch (error) {
-        console.error("Error logging game activity:", error);
+        console.error("Error al registrar la actividad del juego:", error);
       }
     }
   };
@@ -107,10 +107,10 @@ export const AnxietyGames = ({ onGamePlayed }: AnxietyGamesProps) => {
         <CardHeader>
           <CardTitle className="text-xl font-semibold flex items-center gap-2">
             <Gamepad2 className="h-5 w-5 text-primary" />
-            Anxiety Relief Activities
+            Actividades para aliviar la ansiedad
           </CardTitle>
           <CardDescription>
-            Interactive exercises to help reduce stress and anxiety
+            Ejercicios interactivos para ayudar a reducir el estrés y la ansiedad.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -157,7 +157,7 @@ export const AnxietyGames = ({ onGamePlayed }: AnxietyGamesProps) => {
             <div className="mt-6 text-center">
               <Button className="gap-2" onClick={() => setSelectedGame(null)}>
                 <Gamepad2 className="h-4 w-4" />
-                Start {games.find((g) => g.id === selectedGame)?.title}
+                Iniciar {games.find((g) => g.id === selectedGame)?.title}
               </Button>
             </div>
           )}
